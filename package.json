@@ -1,0 +1,26 @@
+{
+  "name": "jellyjam",
+  "version": "1.0.0",
+  "description": "Creating Spotify using MERN Stack",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nh9686ay/jellyjam-server-side.git"
+  },
+  "author": "Ben, Alana, JonQuil, Emon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nh9686ay/jellyjam-server-side/issues"
+  },
+  "homepage": "https://github.com/nh9686ay/jellyjam-server-side#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.4",
+    "nodemon": "^2.0.16"
+  }
+}
