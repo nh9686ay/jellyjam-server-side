@@ -13,7 +13,10 @@ const newUser = {
 
 
 router.get('/', (req, res) => {
-    res.json({"users": ["ben", "emon", "alana", "jon'quil", "amber"]})
+    User.find()
+        .then((users) => {
+            res.json(users)
+        })
 })
 
 router.get('/login', (req, res) => {
@@ -25,14 +28,21 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
+    // console.log(req)
+    // console.log(res)
     User.create({
-        email: newUser.email,
-        userName: newUser.userName,
-        password: newUser.password,
-        likedSongs: newUser.likes
+        email: req.body.email,
+        userName: req.body.userName,
+        password: req.body.password
+        // email: req.email,
+        // userName: req.userName,
+        // password: req.password,
+        // likedSongs: req.likes
     })
         .then((user) => {
             res.json(user)
+            // console.log(req)
+            // console.log(res)
         })
         .catch(console.error)
 })
