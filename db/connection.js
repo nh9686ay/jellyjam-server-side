@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 
 mongoose.connect(
-    `mongodb+srv://nh9686ay:Hitman95@cluster0.0pdjw.mongodb.net/Spotify?retryWrites=true&w=majority`, 
+    // `mongodb+srv://nh9686ay:Hitman95@cluster0.0pdjw.mongodb.net/Spotify?retryWrites=true&w=majority`, 
+    process.env.DB_URL, 
     {
       useNewUrlParser: true,
       // useFindAndModify: false,

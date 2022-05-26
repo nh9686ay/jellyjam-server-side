@@ -19,10 +19,11 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/login', (req, res) => {
-    User.find()
-        .then((users) => {
-            res.json(users)
+router.post('/login', (req, res) => {
+
+    User.find({email: req.body.email, password: req.body.password})
+        .then((user) => {
+            res.json(user)
         })
         .catch(console.error)
 })
