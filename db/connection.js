@@ -16,9 +16,6 @@
 //   db.once("open", function () {
 //     console.log("Connected successfully");
 //   });
-  
-
-module.exports = mongoose
   const mongoose = require("mongoose");
   require('dotenv').config();
   const mongoURI = 
