@@ -16,7 +16,8 @@
 //   db.once("open", function () {
 //     console.log("Connected successfully");
 //   });
-  const mongoose = require("mongoose");
+
+  const mongoose = require("mongoose")
   require('dotenv').config();
   const mongoURI = 
       process.env.NODE_ENV === 'production'
