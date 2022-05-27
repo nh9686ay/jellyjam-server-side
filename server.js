@@ -19,7 +19,7 @@ app.get('/favicon.ico', (req, res) => {
 
 app.use('/user', userController);
 
-const port = 5005;
+const port = process.env.PORT || 5005;
 app.listen(port, () => {
   console.log(`Server is running at port ${port}`);
 });
