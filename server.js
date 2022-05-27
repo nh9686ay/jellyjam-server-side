@@ -11,7 +11,9 @@ const app = express();
 app.use(express.json());
 
 
-
+app.get('/favicon.ico', (req, res) => {
+    console.log('favicon')
+})
 
 // app.use(Router);
 
