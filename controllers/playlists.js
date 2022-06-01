@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.get('/fetchtest', (req, res) => {
+router.get('/featured', (req, res) => {
     const params = new URLSearchParams();
         params.append('grant_type', 'client_credentials');
         const result = axios.post('https://accounts.spotify.com/api/token', params, {
