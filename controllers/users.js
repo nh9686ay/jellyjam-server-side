@@ -29,21 +29,14 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
-    // console.log(req)
-    // console.log(res)
+
     User.create({
         email: req.body.email,
         userName: req.body.userName,
-        password: req.body.password
-        // email: req.email,
-        // userName: req.userName,
-        // password: req.password,
-        // likedSongs: req.likes
+        password: req.body.password    
     })
         .then((user) => {
             res.json(user)
-            // console.log(req)
-            // console.log(res)
         })
         .catch(console.error)
 })
