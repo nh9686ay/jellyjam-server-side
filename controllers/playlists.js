@@ -4,7 +4,7 @@ const cors = require('cors');
 const axios = require('axios');
 
 
-const Playlist = require('../db/models/playlistModel');
+const FeaturedPlaylist = require('../db/models/featuredPlaylistModel');
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ const client_secret = 'cb118a82d49d4d51b6f2e5ecefed9085';
 
 
 router.get('/', (req, res) => {
-    Playlist.find()
+    FeaturedPlaylist.find()
         .then((playlists) => {
             res.json(playlists)
         })
@@ -48,11 +48,11 @@ router.get('/featured', (req, res) => {
             })
             .then(result => {
     
-                Playlist.deleteMany({})
+                FeaturedPlaylist.deleteMany({})
                     .then(() => {
                         for(let i = 0; i < result.data.playlists.items.length; i++) {
 
-                            Playlist.insertMany({
+                            FeaturedPlaylist.insertMany({
                                 description: result.data.playlists.items[i].description,
                                 external_url: result.data.playlists.items[i].external_urls.spotify,
                                 SPId: result.data.playlists.items[i].id,
@@ -75,7 +75,7 @@ router.get('/featured', (req, res) => {
             .catch(console.error)
         })
         .then(() => {
-            Playlist.find()
+            FeaturedPlaylist.find()
             .then((playlists) => {
                 res.json(playlists)
             })
