@@ -2,7 +2,7 @@
 const mongoose = require('../connection');
 
 
-const PlaylistSchema = new mongoose.Schema({
+const FeaturedPlaylistSchema = new mongoose.Schema({
     description: String,
     external_url: String,
     SPId: String,
@@ -18,5 +18,5 @@ const PlaylistSchema = new mongoose.Schema({
 
 
 
-const Playlist = new mongoose.model('Playlist', PlaylistSchema);
-module.exports = Playlist;
+const FeaturedPlaylist = new mongoose.model('FeaturedPlaylist', FeaturedPlaylistSchema);
+module.exports = FeaturedPlaylist;
