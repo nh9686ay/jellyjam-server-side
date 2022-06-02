@@ -5,7 +5,7 @@ const axios = require('axios');
 
 
 const FeaturedPlaylist = require('../db/models/featuredPlaylistModel');
-
+const CreatePlaylist = require('../db/models/playlists');
 const router = express.Router();
 
 router.use(cors());
@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
         .then((playlists) => {
             res.json(playlists)
         })
+        .then(console.log(res.json))
         .catch(console.error);
 })
 
@@ -86,6 +87,18 @@ router.get('/featured', (req, res) => {
 })
 
 
+router.post('/createplaylist', (req, res) => {
+    CreatePlaylist.create({
+        description: req.body.des,
+        image_url: req.body.image_url,
+        name: req.body.name
+    })
+        .then((playlist) => {
+            res.json(playlist)
+            console.log(playlist)
+        })
+        .catch(console.error)
+})
 
 
 

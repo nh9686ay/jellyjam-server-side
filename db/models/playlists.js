@@ -11,7 +11,8 @@ const PlaylistSchema = new mongoose.Schema({
         name: String,
         url: String,
     },
-    totalTracks: Number, 
+    totalTracks: Number,
+    tracks: Array 
 })
 
 
