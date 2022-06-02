@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/nh9686ay/jellyjam-server-side#readme",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.3.4"
