@@ -96,6 +96,49 @@ router.get('/playlistlibrary', (req, res) => {
         .catch(console.error)
 })
 
+router.get('/playlistbyid/:id', (req, res) => {
+    const id = req.params.id
+    Playlist.findById(id)
+        .then(playlist => {
+            res.json(playlist)
+            console.log(playlist)
+        })
+        .catch(console.error)
+})
+
+
+
+router.get('/searchsong/:id', (req, res) => {
+    const searchKey = req.params.id
+
+    const params = new URLSearchParams();
+        params.append('grant_type', 'client_credentials');
+        const result = axios.post('https://accounts.spotify.com/api/token', params, {
+            headers: {
+                'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')),
+                'Content-Type': "application/x-www-form-urlencoded"
+            },
+        })
+        .then((playlist) => {
+
+            const token = playlist.data.access_token
+            axios.get('https://api.spotify.com/v1/search', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params: {
+                    q: searchKey,
+                    type: "track"
+                }
+            })
+            .then((song) => {
+                res.json(song.data.tracks.items[0])
+            })
+            .catch(console.error);
+        })
+        .catch(console.error);
+})
+
 
 router.post('/createplaylist', (req, res) => {
     Playlist.create({
