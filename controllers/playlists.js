@@ -96,6 +96,16 @@ router.get('/playlistlibrary', (req, res) => {
         .catch(console.error)
 })
 
+router.get('/playlistbyid/:id', (req, res) => {
+    const id = req.params.id
+    Playlist.findById(id)
+        .then(playlist => {
+            res.json(playlist)
+            console.log(playlist)
+        })
+        .catch(console.error)
+})
+
 
 router.post('/createplaylist', (req, res) => {
     Playlist.create({
