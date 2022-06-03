@@ -5,7 +5,7 @@ const axios = require('axios');
 
 
 const FeaturedPlaylist = require('../db/models/featuredPlaylistModel');
-const CreatePlaylist = require('../db/models/playlists');
+const Playlist = require('../db/models/playlists');
 const router = express.Router();
 
 router.use(cors());
@@ -17,7 +17,7 @@ const client_secret = 'cb118a82d49d4d51b6f2e5ecefed9085';
 
 
 router.get('/', (req, res) => {
-    FeaturedPlaylist.find()
+    Playlist.find()
         .then((playlists) => {
             res.json(playlists)
         })
@@ -87,8 +87,18 @@ router.get('/featured', (req, res) => {
 })
 
 
+
+router.get('/playlistlibrary', (req, res) => {
+    Playlist.find()
+        .then((playlists) => {
+            res.json(playlists)
+        })
+        .catch(console.error)
+})
+
+
 router.post('/createplaylist', (req, res) => {
-    CreatePlaylist.create({
+    Playlist.create({
         description: req.body.des,
         image_url: req.body.image_url,
         name: req.body.name
@@ -99,6 +109,7 @@ router.post('/createplaylist', (req, res) => {
         })
         .catch(console.error)
 })
+
 
 
 
