@@ -110,7 +110,14 @@ router.post('/createplaylist', (req, res) => {
         .catch(console.error)
 })
 
-
+router.delete('/deleteplaylist/:id', (req, res) => {
+    const id = req.params.id
+    Playlist.deleteOne({ _id: id })
+        .then(playlist => {
+            console.log(playlist)
+        })
+        .catch(console.error)
+})
 
 
 
