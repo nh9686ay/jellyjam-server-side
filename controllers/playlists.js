@@ -148,10 +148,59 @@ router.post('/createplaylist', (req, res) => {
     })
         .then((playlist) => {
             res.json(playlist)
-            console.log(playlist)
         })
         .catch(console.error)
 })
+
+
+router.get('/addsong/:id/:playlistid', (req, res) => {
+    const songId = req.params.id
+    const playlistId = req.params.playlistid
+
+    const params = new URLSearchParams();
+        params.append('grant_type', 'client_credentials');
+        const result = axios.post('https://accounts.spotify.com/api/token', params, {
+            headers: {
+                'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')),
+                'Content-Type': "application/x-www-form-urlencoded"
+            },
+        })
+        .then((playlist) => {
+
+            const token = playlist.data.access_token
+            axios.get(`https://api.spotify.com/v1/tracks/${songId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params: {
+                    // q: songId,
+                    // type: "track"
+                }
+            })
+            .then((song) => {
+                
+                Playlist.findOneAndUpdate({ _id: playlistId}, {$push: {tracks: song.data}})
+                .then(playlist => {
+                    console.log(playlist.tracks)
+                })
+                .catch(console.error);
+            })
+            .catch(console.error);
+        })
+        .catch(console.error);
+})
+
+
+router.put('/deletesong/:id/:playlistid', (req, res) => {
+    const id = req.params.id
+    const playlistId = req.params.playlistid
+    Playlist.findOneAndUpdate({ _id: playlistId}, {$pull: {tracks: {id: id}}})
+        .then(playlist => {
+            console.log(playlist.tracks)
+        })
+        .catch(console.error);
+})
+
 
 router.delete('/deleteplaylist/:id', (req, res) => {
     const id = req.params.id
